@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class CalculatorPresenter implements Initializable {
 
+//    TODO use grid pane?
     @FXML
     private BorderPane pane;
 

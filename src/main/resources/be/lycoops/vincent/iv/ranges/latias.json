@@ -1,0 +1,47 @@
+{
+  "crit": 1.5,
+  "offensiveRanges": [
+    {
+      "description": "latias vs something + 1",
+      "attackerLevel": 45,
+      "damageType": "special",
+      "movePower": 100,
+      "stat": 100,
+      "modifier": 1,
+      "attackModifier": 1.0,
+      "defenseModifier": 1.0,
+      "hp": 123
+    },
+    {
+      "description": "latias vs something else",
+      "attackerLevel": 45,
+      "damageType": "physical",
+      "movePower": 100,
+      "stat": 90,
+      "modifier": 1,
+      "attackModifier": 1.0,
+      "defenseModifier": 1.0,
+      "hp": 123
+    }
+  ],
+  "defensiveRanges": [
+    {
+      "description": "something + 1 vs latias",
+      "attackerLevel": 45,
+      "damageType": "special",
+      "movePower": 100,
+      "stat": 100,
+      "modifier": 1,
+      "attackModifier": 1.0,
+      "defenseModifier": 1.0,
+      "hp": 0
+    }
+  ],
+  "speedRanges": [
+    {
+      "description": "outspeed something",
+      "level": 45,
+      "expectedStat": 123
+    }
+  ]
+}

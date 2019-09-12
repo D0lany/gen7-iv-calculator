@@ -3,10 +3,7 @@ package be.lycoops.vincent.iv.calculator.reset;
 import be.lycoops.vincent.iv.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -32,8 +29,14 @@ public class ResetPresenter implements Initializable {
     @FXML
     private CheckBox askOnChangeButton;
 
+    @FXML
+    private TextArea ranges;
+
     @Inject
     private Pokemon pokemon;
+
+    @Inject
+    private RangesCalculator rangesCalculator;
 
     @Inject
     private HiddenPowerCalculator hiddenPowerCalculator;
@@ -60,6 +63,11 @@ public class ResetPresenter implements Initializable {
         }
     }
 
+//    TODO make view better
+    public void calculateRanges() {
+        ranges.setText(rangesCalculator.calculateAll());
+    }
+
     public void askOnChangeAction() {
         prefs.put(askOnChangePref, String.valueOf(askOnChangeButton.isSelected()));
     }
@@ -76,6 +84,7 @@ public class ResetPresenter implements Initializable {
         pokemon.reset();
         natureCalculator.reset();
         pokemon.setHiddenPower(hiddenPowerCalculator.setUnknown());
+        rangesCalculator.loadRanges();
         history.reset();
     }
 
@@ -84,6 +93,7 @@ public class ResetPresenter implements Initializable {
         prefs = Preferences.userRoot().node(this.getClass().getName());
 
         askOnChangeButton.setSelected(prefs.getBoolean(askOnChangePref,false));
+        ranges.setDisable(true);
 
         routeSelect.getItems().removeAll(routeSelect.getItems());
 
