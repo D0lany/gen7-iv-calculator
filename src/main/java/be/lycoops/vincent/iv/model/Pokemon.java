@@ -106,7 +106,7 @@ public class Pokemon {
      */
     public void reset() {
 //        TODO order of setting values should not matter for the view, but it does
-        PokemonModel pokemonModel = PokemonModelProvider.loadPokemonFile(EffortValueProvider.getRoute());
+        PokemonModel pokemonModel = PokemonModelProvider.loadPokemonFile();
         baseValues.put(Stat.HP, pokemonModel.getBaseStats().getHp());
         baseValues.put(Stat.ATK, pokemonModel.getBaseStats().getAtk());
         baseValues.put(Stat.DEF, pokemonModel.getBaseStats().getDef());

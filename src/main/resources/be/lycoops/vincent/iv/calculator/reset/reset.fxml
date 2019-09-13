@@ -3,36 +3,41 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox prefHeight="178.0" prefWidth="253.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.lycoops.vincent.iv.calculator.reset.ResetPresenter">
+<VBox maxWidth="9.99999999999999E14" prefHeight="178.0" prefWidth="500.0" BorderPane.alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.lycoops.vincent.iv.calculator.reset.ResetPresenter">
     <children>
-        <Button mnemonicParsing="false" onAction="#reset" prefHeight="35.0" prefWidth="45.0" text="Reset" textAlignment="CENTER">
-            <VBox.margin>
-                <Insets top="45.0" />
-            </VBox.margin>
-        </Button>
-        <Label text="Route">
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
-        </Label>
-          <ComboBox fx:id="routeSelect" onAction="#reset" prefWidth="150.0">
-             <VBox.margin>
-                <Insets top="5.0" />
-             </VBox.margin>
-          </ComboBox>
-      <CheckBox fx:id="askOnChangeButton" mnemonicParsing="false" onAction="#askOnChangeAction" text="Don't ask on reset">
-         <VBox.margin>
-            <Insets top="5.0" />
-         </VBox.margin>
-      </CheckBox>
+        <Region HBox.hgrow="ALWAYS" />
+      <HBox>
+         <children>
+              <Button mnemonicParsing="false" onAction="#reset" prefHeight="35.0" prefWidth="45.0" text="Reset" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+              </Button>
+              <Label prefHeight="23.0" prefWidth="38.0" text="Route:">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+              </Label>
+                <ComboBox fx:id="routeSelect" onAction="#reset" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+                </ComboBox>
+            <CheckBox fx:id="askOnChangeButton" mnemonicParsing="false" onAction="#askOnChangeAction" prefHeight="24.0" prefWidth="117.0" text="Don't ask on reset">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </CheckBox>
+         </children>
+      </HBox>
         <Button mnemonicParsing="false" onAction="#calculateRanges" prefHeight="35.0" prefWidth="145.0" text="Refresh ranges" textAlignment="CENTER">
             <VBox.margin>
-                <Insets top="45.0" />
+                <Insets left="10.0" top="10.0" />
             </VBox.margin>
         </Button>
-        <TextArea fx:id="ranges">
+        <TextArea fx:id="ranges" maxHeight="-Infinity" maxWidth="9.99999999999999E14" prefHeight="500.0" prefWidth="487.0">
             <VBox.margin>
-                <Insets top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
             </VBox.margin>
         </TextArea>
     </children>

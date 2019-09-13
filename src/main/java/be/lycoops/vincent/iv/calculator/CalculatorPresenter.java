@@ -1,6 +1,7 @@
 package be.lycoops.vincent.iv.calculator;
 
 
+import be.lycoops.vincent.iv.calculator.additionalfiles.AdditionalfilesView;
 import be.lycoops.vincent.iv.calculator.configuration.ConfigurationView;
 import be.lycoops.vincent.iv.calculator.hiddenpower.HiddenPowerView;
 import be.lycoops.vincent.iv.calculator.output.OutputView;
@@ -18,7 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 import javax.inject.Inject;
 import java.net.URL;
@@ -28,7 +29,7 @@ public class CalculatorPresenter implements Initializable {
 
 //    TODO use grid pane?
     @FXML
-    private BorderPane pane;
+    private GridPane pane;
 
     @Inject
     private Pokemon pokemon;
@@ -40,11 +41,17 @@ public class CalculatorPresenter implements Initializable {
     private History history;
 
     public void initialize(URL location, ResourceBundle resources) {
-        pane.setTop(new HiddenPowerView().getView());
-        pane.setLeft(new ConfigurationView().getView());
-        pane.setRight(new ResetView().getView());
-        pane.setBottom(new OutputView().getView());
-        pane.setCenter(new StatSelectorView().getView());
+        GridPane top = new GridPane();
+        top.addRow(1,new ConfigurationView().getView(),new AdditionalfilesView().getView(),new HiddenPowerView().getView());
+        GridPane middle = new GridPane();
+        middle.addColumn(1,top,new StatSelectorView().getView(),new OutputView().getView());
+        pane.addColumn(2,middle);
+        pane.addColumn(3,new ResetView().getView());
+//        pane.setTop(new HiddenPowerView().getView());
+//        pane.setLeft(new ConfigurationView().getView());
+//        pane.setRight(new ResetView().getView());
+//        pane.setBottom(new OutputView().getView());
+//        pane.setCenter(new StatSelectorView().getView());
     }
 
     public void setScene(Scene scene) {

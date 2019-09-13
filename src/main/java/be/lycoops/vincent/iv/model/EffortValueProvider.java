@@ -43,11 +43,23 @@ public class EffortValueProvider {
     private static final Pattern pattern = Pattern.compile("^(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)");
 
     private static Map<Stat, Integer> importEffortValues(int level) {
-        String routeFile = String.format("be/lycoops/vincent/iv/routes/%s.txt",route);
+        String routeDir = AdditionalFilesProvider.getRouteDir();
+        String routeFile = "";
+        if (!routeDir.isEmpty()) {
+            routeFile = String.format("%s/%s.txt", routeDir, route);
+        } else {
+            routeFile = String.format("be/lycoops/vincent/iv/routes/%s.txt", route);
+        }
         Path path = FilePathProvider.getPath(routeFile);
         if (path == null) {
-            System.out.println("route file could not be loaded for route: " + route);
-            return null;
+
+            routeFile = String.format("be/lycoops/vincent/iv/routes/%s.txt", route);
+            path = FilePathProvider.getPath(routeFile);
+
+            if (path == null) {
+                System.out.println("route file could not be loaded for route: " + route);
+                return null;
+            }
         }
 
         final Map<Stat, Integer> effortValues = new HashMap<>();

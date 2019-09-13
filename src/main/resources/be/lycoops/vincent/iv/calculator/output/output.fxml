@@ -1,15 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #000" BorderPane.alignment="CENTER" fx:controller="be.lycoops.vincent.iv.calculator.output.OutputPresenter">
+<HBox style="-fx-background-color: #000" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.lycoops.vincent.iv.calculator.output.OutputPresenter">
     <children>
         <Region />
-        <VBox prefWidth="100.0" HBox.hgrow="ALWAYS">
-            <HBox.margin>
-                <Insets />
-            </HBox.margin>
-        </VBox>
         <VBox maxWidth="-Infinity" prefWidth="75.0">
             <children>
                 <Label alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308" text="HP" textFill="WHITE">
@@ -95,7 +92,7 @@
                 </Label>
             </children>
         </VBox>
-        <VBox maxWidth="-Infinity" prefWidth="75.0" onMouseClicked="#makeNeutralNature">
+        <VBox maxWidth="-Infinity" onMouseClicked="#makeNeutralNature" prefWidth="75.0">
             <children>
                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nature" textFill="WHITE">
                     <font>

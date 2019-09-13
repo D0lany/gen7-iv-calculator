@@ -10,35 +10,56 @@ import java.nio.file.Path;
 
 public class PokemonModelProvider {
 
-    public static PokemonModel loadPokemonFile(String route) {
+    public static PokemonModel loadPokemonFile() {
         System.out.println("loading pokemon from file");
-        if (route != null) {
-            String pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", route);
+
+        if (EffortValueProvider.getRoute() != null) {
+            String pokemonDir = AdditionalFilesProvider.getPokemonDir();
+            String pokemonFile = "";
+            if (!pokemonDir.isEmpty()) {
+                pokemonFile = String.format("%s/%s.json", pokemonDir, EffortValueProvider.getRoute());
+            } else {
+                pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", EffortValueProvider.getRoute());
+            }
+            Path path = FilePathProvider.getPath(pokemonFile);
+            if (path == null) {
+
+                if (EffortValueProvider.getRoute().contains("-")) {
+                    if (!pokemonDir.isEmpty()) {
+                        pokemonFile = String.format("%s/%s.json", pokemonDir, EffortValueProvider.getRoute().split("-")[0]);
+                    } else {
+                        pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", EffortValueProvider.getRoute().split("-")[0]);
+                    }
+                }
+                path = FilePathProvider.getPath(pokemonFile);
+                if (path == null) {
+                    pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", EffortValueProvider.getRoute());
+                    path = FilePathProvider.getPath(pokemonFile);
+
+                    if (path == null) {
+                        if (EffortValueProvider.getRoute().contains("-")) {
+                            pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", EffortValueProvider.getRoute().split("-")[0]);
+
+                            path = FilePathProvider.getPath(pokemonFile);
+
+                            if (path == null) {
+                                System.out.println("pokemon file could not be loaded for route: " + EffortValueProvider.getRoute());
+                            }
+                        } else {
+                            System.out.println("pokemon file could not be loaded for route: " + EffortValueProvider.getRoute());
+                        }
+                    }
+                }
+            }
+
             String json = null;
 
             try {
-                Path path = FilePathProvider.getPath(pokemonFile);
                 if (path != null) {
                     json = Files.readString(path);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-
-            if (json == null) {
-
-                if (route.contains("-")) {
-                    pokemonFile = String.format("be/lycoops/vincent/iv/pokemon/%s.json", route.split("-")[0]);
-
-                    try {
-                        Path path = FilePathProvider.getPath(pokemonFile);
-                        if (path != null) {
-                            json = Files.readString(path);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
 
             if (json == null) {

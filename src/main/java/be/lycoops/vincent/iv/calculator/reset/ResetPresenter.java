@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.prefs.Preferences;
 import java.util.stream.Stream;
+
+import static java.util.Objects.isNull;
 
 public class ResetPresenter implements Initializable {
 
@@ -65,7 +65,11 @@ public class ResetPresenter implements Initializable {
 
 //    TODO make view better
     public void calculateRanges() {
-        ranges.setText(rangesCalculator.calculateAll());
+        ranges.clear();
+        List<Damage> damages = rangesCalculator.calculateAll();
+        for (Damage damage : damages) {
+            ranges.appendText(damage.toString());
+        }
     }
 
     public void askOnChangeAction() {
@@ -81,6 +85,7 @@ public class ResetPresenter implements Initializable {
 
         prefs.put(routePref, route);
 
+        ranges.clear();
         pokemon.reset();
         natureCalculator.reset();
         pokemon.setHiddenPower(hiddenPowerCalculator.setUnknown());
@@ -93,18 +98,29 @@ public class ResetPresenter implements Initializable {
         prefs = Preferences.userRoot().node(this.getClass().getName());
 
         askOnChangeButton.setSelected(prefs.getBoolean(askOnChangePref,false));
-        ranges.setDisable(true);
+//        ranges.setDisable(true);
 
         routeSelect.getItems().removeAll(routeSelect.getItems());
 
-        Stream<Path> walk = null;
+        String routeDir = AdditionalFilesProvider.getRouteDir();
+
+        List<Stream<Path>> walk = new ArrayList<>();
         try {
-            walk = Files.walk(FilePathProvider.getPath("be/lycoops/vincent/iv/routes"), 1);
+            Stream<Path> walk1 = Files.walk(FilePathProvider.getPath("be/lycoops/vincent/iv/routes"), 1);
+            if (!isNull(walk1)) {
+                walk.add(walk1);
+            }
+            if (!routeDir.isEmpty()) {
+                Stream<Path> walk2 = Files.walk(FilePathProvider.getPath(routeDir), 1);
+                if (!isNull(walk2)) {
+                    walk.add(walk2);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (walk != null) {
-            for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
+        for (Stream<Path> w : walk) {
+            for (Iterator<Path> it = w.iterator(); it.hasNext(); ) {
                 String route = it.next().getFileName().toString().split("\\.txt")[0];
                 if (route.equals("routes")) continue;
                 routeSelect.getItems().add(route);

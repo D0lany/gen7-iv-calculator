@@ -2,8 +2,10 @@
   "crit": 1.5,
   "offensiveRanges": [
     {
+      "pos": 1,
       "description": "latias vs something + 1",
       "attackerLevel": 45,
+      "defenderLevel": 45,
       "damageType": "special",
       "movePower": 100,
       "stat": 100,
@@ -13,8 +15,10 @@
       "hp": 123
     },
     {
+      "pos": 4,
       "description": "latias vs something else",
       "attackerLevel": 45,
+      "defenderLevel": 45,
       "damageType": "physical",
       "movePower": 100,
       "stat": 90,
@@ -26,8 +30,10 @@
   ],
   "defensiveRanges": [
     {
+      "pos": 2,
       "description": "something + 1 vs latias",
       "attackerLevel": 45,
+      "defenderLevel": 45,
       "damageType": "special",
       "movePower": 100,
       "stat": 100,
@@ -39,6 +45,7 @@
   ],
   "speedRanges": [
     {
+      "pos": 3,
       "description": "outspeed something",
       "level": 45,
       "expectedStat": 123
